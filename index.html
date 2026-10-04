@@ -4,13 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ravintola</title>
+    <title>Student restaurant lookup</title>
+    <meta
+      name="description"
+      content="Find student restaurant menus across Finland."
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
     <script type="module" src="js/main.js" defer></script>
+    <script type="module" src="js/auth.js"></script>
     <link rel="icon" href="images/cool_pancake_tp.png" />
   </head>
 
@@ -20,7 +25,11 @@
         <div class="logo">
           <img src="images/cool_pancake_tp.png" alt="pancake logo" />
           <h1>Student restaurant lookup</h1>
-          <meta name="description" content="Find student restaraunt menus across Finland."
+        </div>
+        <div class="user-area">
+          <span id="user-info"></span>
+          <a href="login.html" id="login-link">Log in</a>
+          <button type="button" id="logout-btn" hidden>Log out</button>
         </div>
       </header>
 
