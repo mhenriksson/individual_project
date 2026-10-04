@@ -41,5 +41,3 @@ requirements:
   3. Start `index.html` with the Live Server extension
   4. Connect to the Metropolia network or VPN so the API works
 
-Here is a link to the validation results.
-https://users.metropolia.fi/~mikkohen/individual_project/images/
