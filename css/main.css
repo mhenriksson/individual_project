@@ -137,3 +137,15 @@ header {
   color: #5c4033;
   margin: 16px 0 0;
 }
+
+@media (max-width: 600px) {
+  .products {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .product-card {
+    width: 120px;
+    padding: 12px;
+  }
+}
