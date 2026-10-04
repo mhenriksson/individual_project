@@ -20,7 +20,7 @@ let showWeekly = false;
 const courseCard = (course) => `
   <div class="product-card">
     <h2>${course.name}</h2>
-    <p>${course.diets || ''}</p>
+    ${course.diets ? `<p class="diets">${course.diets}</p>` : ''}
     <p class="price">${course.price || ''}</p>
   </div>
 `;
@@ -28,36 +28,44 @@ const courseCard = (course) => `
 const showMenu = async () => {
   menu.innerHTML = '';
 
-  if (showWeekly) {
-    const response = await fetch(
-      `${API_URL}/restaurants/weekly/${select.value}/en`
-    );
-    const data = await response.json();
+  try {
+    if (showWeekly) {
+      const response = await fetch(
+        `${API_URL}/restaurants/weekly/${select.value}/en`
+      );
+      const data = await response.json();
 
-    data.days.forEach((day, index) => {
-      menu.innerHTML += `<h2 class="day">${weekdays[index]}</h2>`;
-      for (const course of day.courses) {
+      data.days.forEach((day, index) => {
+        if (day.courses.length === 0) {
+          return;
+        }
+        menu.innerHTML += `<h2 class="day">${weekdays[index]}</h2>`;
+        for (const course of day.courses) {
+          menu.innerHTML += courseCard(course);
+        }
+      });
+    } else {
+      const response = await fetch(
+        `${API_URL}/restaurants/daily/${select.value}/en`
+      );
+      const data = await response.json();
+
+      if (data.courses.length > 0) {
+        const today = new Date().toLocaleDateString('en-GB', {weekday: 'long'});
+        menu.innerHTML += `<h2 class="day">${today}</h2>`;
+      }
+
+      for (const course of data.courses) {
         menu.innerHTML += courseCard(course);
       }
-    });
-  } else {
-    const response = await fetch(
-      `${API_URL}/restaurants/daily/${select.value}/en`
-    );
-    const data = await response.json();
-
-    if (data.courses.length > 0) {
-      const today = new Date().toLocaleDateString('en-GB', {weekday: 'long'});
-      menu.innerHTML += `<h2 class="day">${today}</h2>`;
     }
 
-    for (const course of data.courses) {
-      menu.innerHTML += courseCard(course);
+    if (menu.innerHTML === '') {
+      menu.innerHTML = '<p class="message">No menu available.</p>';
     }
-  }
-
-  if (menu.innerHTML === '') {
-    menu.innerHTML = '<p>No menu available.</p>';
+  } catch (error) {
+    console.error(error);
+    menu.innerHTML = `<p class="message">Could not load menu. Check network connection.</p>`;
   }
 };
 
@@ -70,14 +78,19 @@ const showRestaurant = () => {
 };
 
 const getRestaurants = async () => {
-  const response = await fetch(`${API_URL}/restaurants`);
-  restaurants = await response.json();
-  restaurants.sort((a, b) => a.name.localeCompare(b.name));
-  for (const restaurant of restaurants) {
-    select.innerHTML += `<option value="${restaurant._id}">${restaurant.name}</option>`;
-  }
+  try {
+    const response = await fetch(`${API_URL}/restaurants`);
+    restaurants = await response.json();
+    restaurants.sort((a, b) => a.name.localeCompare(b.name));
+    for (const restaurant of restaurants) {
+      select.innerHTML += `<option value="${restaurant._id}">${restaurant.name}</option>`;
+    }
 
-  showRestaurant();
+    showRestaurant();
+  } catch (error) {
+    console.error(error);
+    menu.innerHTML = `<p class="message">Could not load restaurants. Check network connection.</p>`;
+  }
 };
 todayBtn.addEventListener('click', () => {
   showWeekly = false;
