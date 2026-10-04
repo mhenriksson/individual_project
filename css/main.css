@@ -19,6 +19,7 @@ header {
 .logo {
   color: #ffffff;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .logo img {
@@ -148,4 +149,92 @@ header {
     width: 120px;
     padding: 12px;
   }
+
+  .auth-page {
+    margin: 24px 16px;
+  }
+}
+
+.user-area {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.user-area a,
+.user-area button {
+  border: none;
+  background: none;
+  color: #ffffff;
+  padding: 0;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.user-area a:hover,
+.user-area button:hover {
+  color: #f4c95d;
+}
+
+.auth-page {
+  max-width: 420px;
+  margin: 50px auto;
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+}
+
+.auth-page h2 {
+  margin: 0;
+  color: #5c4033;
+}
+
+.auth-page label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.auth-page input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 1px solid #bbb;
+}
+
+.auth-page input:focus {
+  outline: 2px solid #694331;
+}
+
+.auth-page button {
+  margin-top: 20px;
+  padding: 11px 22px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: inherit;
+  color: #ffffff;
+  background: #694331;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-page button:hover {
+  background: #4a2f22;
+}
+
+.auth-page a {
+  color: #694331;
+  font-weight: bold;
 }
