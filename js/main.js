@@ -72,7 +72,7 @@ const showRestaurant = () => {
 const getRestaurants = async () => {
   const response = await fetch(`${API_URL}/restaurants`);
   restaurants = await response.json();
-
+  restaurants.sort((a, b) => a.name.localeCompare(b.name));
   for (const restaurant of restaurants) {
     select.innerHTML += `<option value="${restaurant._id}">${restaurant.name}</option>`;
   }
