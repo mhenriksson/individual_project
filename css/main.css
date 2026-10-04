@@ -136,3 +136,10 @@ header {
   color: #5c4033;
   margin: 0;
 }
+
+.day {
+  width: 100%;
+  text-align: center;
+  color: #5c4033;
+  margin: 16px 0 0;
+}
